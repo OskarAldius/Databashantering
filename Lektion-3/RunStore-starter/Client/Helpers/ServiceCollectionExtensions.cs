@@ -2,6 +2,7 @@ using System;
 using Client.Enums;
 using Client.Factories;
 using Client.Interfaces;
+using Client.Models;
 using Client.Services;
 using Client.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<IProductService, ProductServices>();
         collection.AddTransient<ICustomerService, CustomerServices>();
         collection.AddTransient<ISalesOrdersService, SalesOrderService>();
-        collection.AddTransient<ISupplierService, SupplierServices>();
+        collection.AddTransient(typeof(ISupplierService<>), typeof(SupplierServices<>));
 
         collection.AddSingleton<Func<PageViewsEnum, ViewModelBase>>(c => name => name switch
         {

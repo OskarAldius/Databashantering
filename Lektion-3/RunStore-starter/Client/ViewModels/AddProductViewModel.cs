@@ -12,7 +12,7 @@ namespace Client.ViewModels;
 public partial class AddProductViewModel : ViewModelBase
 {
     private readonly IProductService _productService;
-    private readonly ISupplierService _supplierService;
+    private readonly ISupplierService<Supplier> _supplierService;
 
     [ObservableProperty]
     public partial string ItemNumber { get; set; } = string.Empty;
@@ -33,16 +33,17 @@ public partial class AddProductViewModel : ViewModelBase
     public AddProductViewModel()
     {
         _productService = new ProductServices();
-        _supplierService = new SupplierServices();
+        _supplierService = new SupplierServices<Supplier>();
         PageTitle = "Ny Produkt";
         Init();
     }
     /*********************************************/
 
-    public AddProductViewModel(IProductService productService, ISupplierService supplierService)
+    public AddProductViewModel(IProductService productService, ISupplierService<Supplier> supplierService)
     {
         _productService = productService;
         _supplierService = supplierService;
+
         PageTitle = "Ny Produkt";
         Init();
     }

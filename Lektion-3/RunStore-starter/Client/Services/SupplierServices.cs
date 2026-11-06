@@ -7,22 +7,21 @@ using Npgsql;
 
 namespace Client.Services;
 
-// public class SupplierServices : BaseService, ISupplierService<Supplier>
-public class SupplierServices : BaseService, ISupplierService
+public class SupplierServices<T> : BaseService, ISupplierService<Supplier>
 {
     public Task Add(Supplier data)
     {
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
     public Task Delete(Supplier data)
     {
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
     public Task<Supplier> FindById(int id)
     {
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
     public async Task<List<Supplier>> ListAll()
@@ -30,52 +29,46 @@ public class SupplierServices : BaseService, ISupplierService
         try
         {
             List<Supplier> suppliers = [];
-
-            // Hämta data ifron postgres
-            //1. Skapa ett anslutingsobjekt
+            // Hämta data ifrån Postgres
+            // 1. Skapa ett anslutningsobjekt
             using NpgsqlConnection connection = new(ConnectionString);
             // 2. Skapa ett fråge objekt
             using NpgsqlCommand command = connection.CreateCommand();
             // 3. Lägg till sql frågan till frågeobjektet
-            command.CommandText = @"SELECT 
-                                       id,
+            command.CommandText = @"SELECT
+                                        id,
                                         suppliername
                                     FROM suppliers";
 
             // 4. Öppna nu anslutningen till databasen => neon.com...
             await connection.OpenAsync();
-            // 5. kör frågan
+            // Kör frågan...
             using NpgsqlDataReader reader = await command.ExecuteReaderAsync();
-            // iterar igenom resultatet
+
+            // Iterar igenom resultatet...
             while (await reader.ReadAsync())
             {
-                suppliers.Add(new Supplier
+                suppliers.Add(new Supplier()
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1)
-
                 });
             }
-
 
             return suppliers;
         }
         catch (InvalidOperationException ex)
         {
             throw new Exception(ex.Message);
-
         }
         catch (Exception ex)
         {
-
             throw new Exception(ex.Message);
         }
     }
 
     public Task Update(Supplier data)
     {
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
-
-
 }
