@@ -12,6 +12,7 @@ public partial class CustomersViewModel : ViewModelBase
 {
     private readonly ICustomerService _customerService;
 
+
     [ObservableProperty]
     public partial ObservableCollection<Customer> Customers { get; set; } = [];
 
