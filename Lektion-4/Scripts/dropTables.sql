@@ -1,0 +1,9 @@
+DROP TABLE salesorders;
+DROP TABLE products;
+DROP TABLE customers;
+DROP TABLE suppliers;
+DROP TABLE addresses;
+DROP TABLE orderitems;
+DROP TABLE supplieraddresses;
+DROP TABLE customeraddresses;
+DROP TABLE addresstypes;
