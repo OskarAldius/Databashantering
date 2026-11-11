@@ -52,7 +52,7 @@ CREATE TABLE products(
     supplier_id INTEGER NOT NULL,
     CONSTRAINT fk_supplier FOREIGN KEY(supplier_id) REFERENCES suppliers(id)
 );
-
+x
 CREATE TABLE orderitems(
     order_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
