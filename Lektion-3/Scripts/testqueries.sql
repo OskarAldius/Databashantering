@@ -2,7 +2,7 @@ SELECT * FROM customers INNER JOIN salesorders ON customers.id = salesorders.cus
 SELECT * FROM salesorders;
 SELECT * FROM customers;
 SELECT * FROM customeraddresses;
-SELECT * FROM addresses;
+SELECT * FROM addresses;    
 SELECT * FROM postalcodes;
 SELECT * FROM cities;
 SELECT * FROM addresstypes;
