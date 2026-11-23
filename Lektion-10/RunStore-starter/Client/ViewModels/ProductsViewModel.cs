@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Client.Interfaces;
-using Client.Models;
-using Client.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Core.Interfaces;
 
 namespace Client.ViewModels;
 
@@ -20,7 +18,7 @@ public partial class ProductsViewModel : ViewModelBase
     public partial bool ShowDialog { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<Entities.Product> Products { get; set; } = [];
+    public partial ObservableCollection<Core.Entities.Product> Products { get; set; } = [];
     // public partial ObservableCollection<Product> Products { get; set; } = [];
 
     public ProductsViewModel()
@@ -76,6 +74,20 @@ public partial class ProductsViewModel : ViewModelBase
         _mainWindowViewModel!.IsBusy = false;
     }
 
+    [RelayCommand]
+    private async Task Edit(int id)
+    {
+        var product = await _productRepo!.FindByIdAsync(id);
+        if (product is not null)
+        {
+            System.Console.WriteLine(product.Name);
+        }
+        else
+        {
+            System.Console.WriteLine("Hittade inget!!!");
+        }
+    }
+
     private async void Init()
     {
         await LoadProducts();
@@ -88,7 +100,7 @@ public partial class ProductsViewModel : ViewModelBase
             _mainWindowViewModel!.IsBusy = true;
             if (_productRepo is not null)
             {
-                Products = new ObservableCollection<Entities.Product>(await _productRepo.ListAllAsync());
+                Products = new ObservableCollection<Core.Entities.Product>(await _productRepo.ListAllAsync());
             }
             // if (_productService is not null)
             // {
